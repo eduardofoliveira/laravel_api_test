@@ -1,20 +1,8 @@
 version: "3.8"
 
 services:
-  # php:
-  #   image: php:8.2-fpm-alpine
-  #   restart: always
-  #   volumes:
-  #     - ./:/var/www/html
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   depends_on:
-  #     - postgres
-  #   links:
-  #     - postgres
-
   db:
+    container_name: laravel-db
     image: postgres:alpine
     restart: always
     environment:
@@ -27,16 +15,16 @@ services:
       - 5432:5432
 
   web:
+    container_name: laravel-web
     restart: always
     build: .
     volumes:
       - ./:/var/www/
     depends_on:
       - db
-    # ports:
-    #   - 5173:5173
 
   nginx:
+    container_name: laravel-nginx
     build: ./.docker/nginx
     restart: always
     ports:
@@ -45,12 +33,3 @@ services:
       - ./:/var/www
     depends_on:
       - web
-  # postgres:
-  #   image: postgres:latest
-  #   restart: always
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: postgres
-  #   ports:
-  #     - 5432:5432

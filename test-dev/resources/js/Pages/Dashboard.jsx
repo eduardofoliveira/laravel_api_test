@@ -50,7 +50,7 @@ export default function Dashboard({ auth }) {
                 </div>
             </div>}
 
-            {orcamentos.length > 1 && <div className="p-12">
+            {orcamentos.length > 0 && <div className="p-12">
                 <div className='flex p-1 justify-center'>
                     <nav aria-label="Page navigation example">
                         <ul className="inline-flex -space-x-px text-sm">
